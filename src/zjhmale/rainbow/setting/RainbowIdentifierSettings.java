@@ -15,7 +15,7 @@ import org.jetbrains.annotations.Nullable;
         @Storage(id = "rainbowidentifier_config", file = "$APP_CONFIG$/rainbowidentifer_application.xml")
 })
 public class RainbowIdentifierSettings implements PersistentStateComponent<RainbowIdentifierSettings> {
-    public boolean isRainbowIdentifier;
+    public boolean isRainbowIdentifier = true;
 
     @Nullable
     @Override

@@ -13,6 +13,7 @@ public class RainbowIdentifierSettingsForm {
     private final RainbowIdentifierSettings settings;
 
     public RainbowIdentifierSettingsForm() {
+        rainbowIdentifierCheckBox.setSelected(true);
         settings = RainbowIdentifierSettings.getInstance();
     }
 
