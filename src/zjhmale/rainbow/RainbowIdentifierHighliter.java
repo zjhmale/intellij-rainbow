@@ -26,7 +26,6 @@ public class RainbowIdentifierHighliter implements Annotator {
     private static List<String> parenthesesList = Arrays.asList(parentheses);
 
     /**
-     *
      * @param identifier
      * @param background
      * @return
