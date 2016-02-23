@@ -1,5 +1,7 @@
 ## Rainbow identifiers plugin
 
+https://plugins.jetbrains.com/plugin/8214
+
 Providing highlighting of identifiers based on their names. Each identifier gets a color based on a hash of its name.
 
 ## Snapshots
