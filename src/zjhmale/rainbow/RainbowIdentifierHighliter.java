@@ -47,19 +47,27 @@ public class RainbowIdentifierHighliter implements Annotator {
             IElementType type = ((LeafPsiElement) element).getElementType();
             String t = element.getNode().getText();
 
-            boolean javaPredicate = element.getLanguage().getID().equals("JAVA")
+            String languageID = element.getLanguage().getID();
+
+            //for JAVA and Kotlin
+            boolean javaLikePredicate = (languageID.equals("JAVA") || languageID.equals("Kotlin"))
                     && type != JavaTokenType.C_STYLE_COMMENT
                     && type != JavaTokenType.END_OF_LINE_COMMENT
                     && !JavaDocTokenType.ALL_JAVADOC_TOKENS.contains(type);
-            boolean clojurePredicate = element.getLanguage().getID().equals("Clojure")
+            boolean clojurePredicate = languageID.equals("Clojure")
                     && !t.startsWith(";")
                     && !t.startsWith("#_")
                     && !t.startsWith("#(")
                     && !t.startsWith("#{");
+            boolean pythonPredicate = languageID.equals("Python")
+                    && !t.startsWith("#");
+            //for Haskell and Agda
+            boolean haskellLikePredicate = (languageID.equals("Haskell") || languageID.equals("Agda"))
+                    && !t.startsWith("--");
             boolean isParentheses = parenthesesList.contains(t);
-            boolean isString = t.startsWith("\"") && t.endsWith("\"");
+            boolean isString = (t.startsWith("\"") && t.endsWith("\"")) || (t.startsWith("\'") && t.endsWith("\'"));
 
-            if ((javaPredicate || clojurePredicate) && !isParentheses && !isString) {
+            if ((javaLikePredicate || clojurePredicate || pythonPredicate || haskellLikePredicate) && !isParentheses && !isString) {
                 final EditorColorsScheme scheme = EditorColorsManager.getInstance().getGlobalScheme();
                 TextAttributes attrs = getBraceAttributes(t, scheme.getDefaultBackground());
                 holder.createInfoAnnotation(element, null).setEnforcedTextAttributes(attrs);
