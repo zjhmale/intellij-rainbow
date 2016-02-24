@@ -1,7 +1,7 @@
 <idea-plugin version="2">
   <id>zjhmale.rainbow</id>
   <name>Rainbow Identifier</name>
-  <version>1.0</version>
+  <version>1.1</version>
   <vendor email="zjhmale@gmail.com" url="https://github.com/zjhmale">zjhmale</vendor>
 
   <description><![CDATA[
@@ -9,7 +9,14 @@
     ]]></description>
 
   <change-notes><![CDATA[
-      Support for java and clojure Programming Language
+      <p>1.1:</p>
+      <ul>
+        <li>Support for Kotlin, Python, Haskell and Agda Programming Language</li>
+      </ul>
+      <p>1.0:</p>
+      <ul>
+        <li>Support for Java and Clojure Programming Language</li>
+      </ul>
     ]]>
   </change-notes>
 
