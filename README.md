@@ -21,7 +21,11 @@ Providing highlighting of identifiers based on their names. Each identifier gets
 ## Support Languages
 
 * Java
+* Kotlin (IDEA 14+)
 * Clojure
+* Python
+* Haskell
+* Agda
 
 ## License
 
