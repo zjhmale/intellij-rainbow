@@ -40,6 +40,21 @@ public class RainbowIdentifierHighliter implements Annotator {
         return new TextAttributes(rainbowColor, null, null, null, Font.PLAIN);
     }
 
+    //predicate #_ reader
+    private static boolean ignoreNextFormParent(PsiElement psiElement) {
+        boolean predicate = false;
+        PsiElement eachParent = psiElement;
+        while (eachParent != null) {
+            if (eachParent.getClass().toString().equals("class cursive.psi.impl.ClSexpComment")) {
+                if (eachParent.getText().startsWith("#_")) {
+                    predicate = true;
+                }
+            }
+            eachParent = eachParent.getParent();
+        }
+        return predicate;
+    }
+
     @Override
     public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder holder) {
         if (element instanceof LeafPsiElement && RainbowIdentifierSettings.getInstance().isRainbowIdentifier) {
@@ -57,7 +72,8 @@ public class RainbowIdentifierHighliter implements Annotator {
                     && !t.startsWith(";")
                     && !t.startsWith("#_")
                     && !t.startsWith("#(")
-                    && !t.startsWith("#{");
+                    && !t.startsWith("#{")
+                    && !ignoreNextFormParent(element);
             boolean pythonPredicate = languageID.equals("Python")
                     && !t.startsWith("#");
             //for Haskell and Agda
