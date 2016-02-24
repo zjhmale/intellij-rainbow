@@ -1,7 +1,7 @@
 <idea-plugin version="2">
   <id>zjhmale.rainbow</id>
   <name>Rainbow Identifier</name>
-  <version>1.1</version>
+  <version>1.2</version>
   <vendor email="zjhmale@gmail.com" url="https://github.com/zjhmale">zjhmale</vendor>
 
   <description><![CDATA[
@@ -9,9 +9,13 @@
     ]]></description>
 
   <change-notes><![CDATA[
+      <p>1.2:</p>
+      <ul>
+        <li>Do not highlight Ignore next form (#_) in Clojure</li>
+      </ul>
       <p>1.1:</p>
       <ul>
-        <li>Support for Kotlin, Python, Haskell and Agda Programming Language</li>
+        <li>Support for Kotlin Python Haskell and Agda Programming Language</li>
       </ul>
       <p>1.0:</p>
       <ul>
