@@ -42,7 +42,6 @@ public class RainbowIdentifierHighliter implements Annotator {
 
     @Override
     public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder holder) {
-        System.out.println(RainbowIdentifierSettings.getInstance().isRainbowIdentifier);
         if (element instanceof LeafPsiElement && RainbowIdentifierSettings.getInstance().isRainbowIdentifier) {
             IElementType type = ((LeafPsiElement) element).getElementType();
             String t = element.getNode().getText();
@@ -50,7 +49,7 @@ public class RainbowIdentifierHighliter implements Annotator {
             String languageID = element.getLanguage().getID();
 
             //for JAVA and Kotlin
-            boolean javaLikePredicate = (languageID.equals("JAVA") || languageID.equals("Kotlin"))
+            boolean javaLikePredicate = (languageID.equals("JAVA") || languageID.equals("kotlin"))
                     && type != JavaTokenType.C_STYLE_COMMENT
                     && type != JavaTokenType.END_OF_LINE_COMMENT
                     && !JavaDocTokenType.ALL_JAVADOC_TOKENS.contains(type);

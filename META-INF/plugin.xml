@@ -26,7 +26,7 @@
     <!-- Add your extensions here -->
     <annotator language="Clojure" implementationClass="zjhmale.rainbow.RainbowIdentifierHighliter"/>
     <annotator language="JAVA" implementationClass="zjhmale.rainbow.RainbowIdentifierHighliter"/>
-    <annotator language="Kotlin" implementationClass="zjhmale.rainbow.RainbowIdentifierHighliter"/>
+    <annotator language="kotlin" implementationClass="zjhmale.rainbow.RainbowIdentifierHighliter"/>
     <annotator language="Python" implementationClass="zjhmale.rainbow.RainbowIdentifierHighliter"/>
     <annotator language="Haskell" implementationClass="zjhmale.rainbow.RainbowIdentifierHighliter"/>
     <annotator language="Agda" implementationClass="zjhmale.rainbow.RainbowIdentifierHighliter"/>
