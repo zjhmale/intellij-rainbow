@@ -30,7 +30,7 @@ public class RainbowIdentifierHighliter implements Annotator {
      * @param background
      * @return
      */
-    public static TextAttributes getBraceAttributes(String identifier, Color background) {
+    public static TextAttributes getTextAttributes(String identifier, Color background) {
         Color rainbowColor;
         if (background.getRed() < 128 && background.getGreen() < 128 && background.getBlue() < 128) {
             rainbowColor = RainbowColors.DARK_COMMON_COLORS[HashFace.rainbowIdentifierHash(identifier) % RainbowColors.DARK_COMMON_COLORS.length];
@@ -84,7 +84,7 @@ public class RainbowIdentifierHighliter implements Annotator {
 
             if ((javaLikePredicate || clojurePredicate || pythonPredicate || haskellLikePredicate) && !isParentheses && !isString) {
                 final EditorColorsScheme scheme = EditorColorsManager.getInstance().getGlobalScheme();
-                TextAttributes attrs = getBraceAttributes(t, scheme.getDefaultBackground());
+                TextAttributes attrs = getTextAttributes(t, scheme.getDefaultBackground());
                 holder.createInfoAnnotation(element, null).setEnforcedTextAttributes(attrs);
             }
         }
