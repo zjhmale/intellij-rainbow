@@ -5,16 +5,16 @@ import javax.swing.*;
 /**
  * Created by zjh on 16/2/22.
  */
-public class RainbowIdentifierSettingsForm {
+public class RainbowSettingsForm {
     private JPanel panel;
     private JPanel appearancePanel;
     private JCheckBox rainbowIdentifierCheckBox;
 
-    private final RainbowIdentifierSettings settings;
+    private final RainbowSettings settings;
 
-    public RainbowIdentifierSettingsForm() {
+    public RainbowSettingsForm() {
         rainbowIdentifierCheckBox.setSelected(true);
-        settings = RainbowIdentifierSettings.getInstance();
+        settings = RainbowSettings.getInstance();
     }
 
     public JComponent getComponent() {

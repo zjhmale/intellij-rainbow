@@ -10,10 +10,10 @@ import javax.swing.*;
 /**
  * Created by zjh on 2016/2/16.
  */
-public class RainbowIdentifierConfigurable implements Configurable {
-    private RainbowIdentifierSettingsForm settingsForm;
+public class RainbowConfigurable implements Configurable {
+    private RainbowSettingsForm settingsForm;
 
-    public RainbowIdentifierConfigurable() {
+    public RainbowConfigurable() {
         super();
     }
 
@@ -21,7 +21,7 @@ public class RainbowIdentifierConfigurable implements Configurable {
     @Override
     public JComponent createComponent() {
         if (settingsForm == null) {
-            settingsForm = new RainbowIdentifierSettingsForm();
+            settingsForm = new RainbowSettingsForm();
         }
         return settingsForm.getComponent();
     }
@@ -33,7 +33,7 @@ public class RainbowIdentifierConfigurable implements Configurable {
 
     @Override
     public void apply() throws ConfigurationException {
-        RainbowIdentifierSettings settings = RainbowIdentifierSettings.getInstance();
+        RainbowSettings settings = RainbowSettings.getInstance();
         settings.isRainbowIdentifier = settingsForm.isRainbowIdentifier();
     }
 

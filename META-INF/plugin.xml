@@ -1,14 +1,18 @@
 <idea-plugin version="2">
   <id>zjhmale.rainbow</id>
-  <name>Rainbow Identifier</name>
-  <version>1.2</version>
+  <name>Rainbow</name>
+  <version>1.2.1</version>
   <vendor email="zjhmale@gmail.com" url="https://github.com/zjhmale">zjhmale</vendor>
 
   <description><![CDATA[
-      <strong>Rainbow identifier highlighting for IntelliJ IDEA-based IDEs</strong>
+      <strong>Rainbow highlighting identifiers and delimiters for IntelliJ IDEA-based IDEs</strong>
     ]]></description>
 
   <change-notes><![CDATA[
+      <p>1.3:</p>
+      <ul>
+        <li>Support rainbow highlight for delimiters</li>
+      </ul>
       <p>1.2:</p>
       <ul>
         <li>Do not highlight Ignore next form (#_) in Clojure</li>
@@ -35,16 +39,16 @@
 
   <extensions defaultExtensionNs="com.intellij">
     <!-- Add your extensions here -->
-    <annotator language="Clojure" implementationClass="zjhmale.rainbow.RainbowIdentifierHighliter"/>
-    <annotator language="JAVA" implementationClass="zjhmale.rainbow.RainbowIdentifierHighliter"/>
-    <annotator language="kotlin" implementationClass="zjhmale.rainbow.RainbowIdentifierHighliter"/>
-    <annotator language="Python" implementationClass="zjhmale.rainbow.RainbowIdentifierHighliter"/>
-    <annotator language="Haskell" implementationClass="zjhmale.rainbow.RainbowIdentifierHighliter"/>
-    <annotator language="Agda" implementationClass="zjhmale.rainbow.RainbowIdentifierHighliter"/>
+    <annotator language="Clojure" implementationClass="zjhmale.rainbow.RainbowHighliter"/>
+    <annotator language="JAVA" implementationClass="zjhmale.rainbow.RainbowHighliter"/>
+    <annotator language="kotlin" implementationClass="zjhmale.rainbow.RainbowHighliter"/>
+    <annotator language="Python" implementationClass="zjhmale.rainbow.RainbowHighliter"/>
+    <annotator language="Haskell" implementationClass="zjhmale.rainbow.RainbowHighliter"/>
+    <annotator language="Agda" implementationClass="zjhmale.rainbow.RainbowHighliter"/>
 
-    <applicationConfigurable implementation="zjhmale.rainbow.setting.RainbowIdentifierConfigurable"/>
-    <applicationService serviceInterface="zjhmale.rainbow.setting.RainbowIdentifierSettings"
-                        serviceImplementation="zjhmale.rainbow.setting.RainbowIdentifierSettings"/>
+    <applicationConfigurable implementation="zjhmale.rainbow.setting.RainbowConfigurable"/>
+    <applicationService serviceInterface="zjhmale.rainbow.setting.RainbowSettings"
+                        serviceImplementation="zjhmale.rainbow.setting.RainbowSettings"/>
   </extensions>
 
   <application-components>

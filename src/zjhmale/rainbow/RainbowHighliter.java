@@ -12,7 +12,7 @@ import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 import zjhmale.rainbow.encode.HashFace;
-import zjhmale.rainbow.setting.RainbowIdentifierSettings;
+import zjhmale.rainbow.setting.RainbowSettings;
 
 import java.awt.*;
 import java.util.Arrays;
@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * Created by zjh on 2016/2/13.
  */
-public class RainbowIdentifierHighliter implements Annotator {
+public class RainbowHighliter implements Annotator {
     private static String[] parentheses = {"(", ")", "{", "}", "[", "]"};
     private static List<String> parenthesesList = Arrays.asList(parentheses);
 
@@ -57,7 +57,7 @@ public class RainbowIdentifierHighliter implements Annotator {
 
     @Override
     public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder holder) {
-        if (element instanceof LeafPsiElement && RainbowIdentifierSettings.getInstance().isRainbowIdentifier) {
+        if (element instanceof LeafPsiElement && RainbowSettings.getInstance().isRainbowIdentifier) {
             IElementType type = ((LeafPsiElement) element).getElementType();
             String t = element.getNode().getText();
 
