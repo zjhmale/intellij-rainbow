@@ -33,7 +33,6 @@ public class RainbowIdentifierConfigurable implements Configurable {
 
     @Override
     public void apply() throws ConfigurationException {
-        System.out.println("apply");
         RainbowIdentifierSettings settings = RainbowIdentifierSettings.getInstance();
         settings.isRainbowIdentifier = settingsForm.isRainbowIdentifier();
     }
