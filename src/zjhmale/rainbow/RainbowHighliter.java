@@ -15,6 +15,7 @@ import zjhmale.rainbow.encode.HashFace;
 import zjhmale.rainbow.setting.RainbowSettings;
 
 import java.awt.*;
+import java.awt.font.TextAttribute;
 import java.util.Arrays;
 import java.util.List;
 
@@ -22,22 +23,36 @@ import java.util.List;
  * Created by zjh on 2016/2/13.
  */
 public class RainbowHighliter implements Annotator {
-    private static String[] parentheses = {"(", ")", "{", "}", "[", "]"};
-    private static List<String> parenthesesList = Arrays.asList(parentheses);
+    private static String[] delimiters = {"(", ")", "{", "}", "[", "]"};
+    private static List<String> delimitersList = Arrays.asList(delimiters);
 
-    /**
-     * @param identifier
-     * @param background
-     * @return
-     */
-    public static TextAttributes getTextAttributes(String identifier, Color background) {
+    private static Color getAttributesColor(int selector, Color background) {
         Color rainbowColor;
         if (background.getRed() < 128 && background.getGreen() < 128 && background.getBlue() < 128) {
-            rainbowColor = RainbowColors.DARK_COMMON_COLORS[HashFace.rainbowIdentifierHash(identifier) % RainbowColors.DARK_COMMON_COLORS.length];
+            rainbowColor = RainbowColors.DARK_COMMON_COLORS[selector % RainbowColors.DARK_COMMON_COLORS.length];
         } else {
-            rainbowColor = RainbowColors.LIGHT_COMMON_COLORS[HashFace.rainbowIdentifierHash(identifier) % RainbowColors.LIGHT_COMMON_COLORS.length];
+            rainbowColor = RainbowColors.LIGHT_COMMON_COLORS[selector % RainbowColors.LIGHT_COMMON_COLORS.length];
         }
+        return rainbowColor;
+    }
+
+    private static TextAttributes getIdentifierAttributes(String identifier, Color background) {
+        Color rainbowColor = getAttributesColor(HashFace.rainbowIdentifierHash(identifier), background);
         return new TextAttributes(rainbowColor, null, null, null, Font.PLAIN);
+    }
+
+    private static TextAttributes getDelimiterAttributes(int level, Color background) {
+        Color rainbowColor = getAttributesColor(level, background);
+        return new TextAttributes(rainbowColor, null, null, null, Font.PLAIN);
+    }
+
+    private static boolean containsDelimiters(String text) {
+        return text.contains("(")
+                || text.contains(")")
+                || text.contains("{")
+                || text.contains("}")
+                || text.contains("[")
+                || text.contains("]");
     }
 
     //predicate #_ reader
@@ -55,13 +70,40 @@ public class RainbowHighliter implements Annotator {
         return predicate;
     }
 
+    //get delimiter level
+    private static int getDelimiterLevel(PsiElement psiElement) {
+        int level = -1;
+        PsiElement eachParent = psiElement;
+        while (eachParent != null) {
+            if (containsDelimiters(eachParent.getText())) {
+                level++;
+            }
+            eachParent = eachParent.getParent();
+        }
+        return level;
+    }
+
     @Override
     public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder holder) {
-        if (element instanceof LeafPsiElement && RainbowSettings.getInstance().isRainbowIdentifier) {
+        RainbowSettings settings = RainbowSettings.getInstance();
+
+        final EditorColorsScheme scheme = EditorColorsManager.getInstance().getGlobalScheme();
+        Color backgroundColor = scheme.getDefaultBackground();
+
+        String languageID = element.getLanguage().getID();
+
+        if (element instanceof LeafPsiElement
+                && delimitersList.contains(element.getText())
+                && !languageID.equals("Clojure")
+                && settings.isRainbowDelimiter) {
+            int level = getDelimiterLevel(element);
+            TextAttributes attrs = getDelimiterAttributes(level, backgroundColor);
+            holder.createInfoAnnotation(element, null).setEnforcedTextAttributes(attrs);
+        }
+
+        if (element instanceof LeafPsiElement && settings.isRainbowIdentifier) {
             IElementType type = ((LeafPsiElement) element).getElementType();
             String t = element.getNode().getText();
-
-            String languageID = element.getLanguage().getID();
 
             //for JAVA and Kotlin
             boolean javaLikePredicate = (languageID.equals("JAVA") || languageID.equals("kotlin"))
@@ -79,12 +121,11 @@ public class RainbowHighliter implements Annotator {
             //for Haskell and Agda
             boolean haskellLikePredicate = (languageID.equals("Haskell") || languageID.equals("Agda"))
                     && !t.startsWith("--");
-            boolean isParentheses = parenthesesList.contains(t);
+            boolean isParentheses = delimitersList.contains(t);
             boolean isString = (t.startsWith("\"") && t.endsWith("\"")) || (t.startsWith("\'") && t.endsWith("\'"));
 
             if ((javaLikePredicate || clojurePredicate || pythonPredicate || haskellLikePredicate) && !isParentheses && !isString) {
-                final EditorColorsScheme scheme = EditorColorsManager.getInstance().getGlobalScheme();
-                TextAttributes attrs = getTextAttributes(t, scheme.getDefaultBackground());
+                TextAttributes attrs = getIdentifierAttributes(t, backgroundColor);
                 holder.createInfoAnnotation(element, null).setEnforcedTextAttributes(attrs);
             }
         }
