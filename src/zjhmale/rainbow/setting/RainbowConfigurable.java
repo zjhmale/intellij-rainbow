@@ -35,6 +35,7 @@ public class RainbowConfigurable implements Configurable {
     public void apply() throws ConfigurationException {
         RainbowSettings settings = RainbowSettings.getInstance();
         settings.isRainbowIdentifier = settingsForm.isRainbowIdentifier();
+        settings.isRainbowDelimiter = settingsForm.isRainbowDelimiter();
     }
 
     @Override
@@ -52,7 +53,7 @@ public class RainbowConfigurable implements Configurable {
     @Nls
     @Override
     public String getDisplayName() {
-        return "Rainbow Identifier";
+        return "Rainbow";
     }
 
     @Nullable

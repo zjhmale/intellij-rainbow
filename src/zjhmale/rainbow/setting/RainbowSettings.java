@@ -12,10 +12,11 @@ import org.jetbrains.annotations.Nullable;
  */
 
 @State(name = "RainbowSettings", storages = {
-        @Storage(id = "rainbowidentifier_config", file = "$APP_CONFIG$/rainbowidentifer_application.xml")
+        @Storage(id = "rainbow_config", file = "$APP_CONFIG$/rainbow_application.xml")
 })
 public class RainbowSettings implements PersistentStateComponent<RainbowSettings> {
     public boolean isRainbowIdentifier = true;
+    public boolean isRainbowDelimiter = true;
 
     @Nullable
     @Override

@@ -9,11 +9,14 @@ public class RainbowSettingsForm {
     private JPanel panel;
     private JPanel appearancePanel;
     private JCheckBox rainbowIdentifierCheckBox;
+    private JCheckBox rainbowDelimiterCheckBox;
 
     private final RainbowSettings settings;
 
     public RainbowSettingsForm() {
         rainbowIdentifierCheckBox.setSelected(true);
+        rainbowDelimiterCheckBox.setSelected(true);
+
         settings = RainbowSettings.getInstance();
     }
 
@@ -25,12 +28,17 @@ public class RainbowSettingsForm {
         return rainbowIdentifierCheckBox.isSelected();
     }
 
+    public boolean isRainbowDelimiter() {
+        return rainbowDelimiterCheckBox.isSelected();
+    }
+
     public boolean isModified() {
-        final boolean isRainbowIdentifier = settings.isRainbowIdentifier;
-        return (rainbowIdentifierCheckBox.isSelected() != isRainbowIdentifier);
+        return rainbowIdentifierCheckBox.isSelected() != settings.isRainbowIdentifier
+                || rainbowDelimiterCheckBox.isSelected() != settings.isRainbowDelimiter;
     }
 
     public void reset() {
         rainbowIdentifierCheckBox.setSelected(settings.isRainbowIdentifier);
+        rainbowDelimiterCheckBox.setSelected(settings.isRainbowDelimiter);
     }
 }
