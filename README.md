@@ -1,8 +1,9 @@
-## Rainbow identifiers plugin
+## Rainbow plugin
 
 https://plugins.jetbrains.com/plugin/8214
 
-Providing highlighting of identifiers based on their names. Each identifier gets a color based on a hash of its name.
+* Rainbow highlighting identifiers based on their names. Each identifier gets a color based on a hash of its name.
+* Rainbow highlighting delimiters such as parentheses, brackets or braces according to their depth. not just in Lisp.
 
 ## Snapshots
 
@@ -22,7 +23,7 @@ Providing highlighting of identifiers based on their names. Each identifier gets
 
 * Java
 * Kotlin (IDEA 14+)
-* Clojure
+* Clojure ([Cursive](https://cursive-ide.com/) already support Rainbow Delimiter)
 * Python
 * Haskell
 * Agda

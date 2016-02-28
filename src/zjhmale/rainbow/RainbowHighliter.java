@@ -15,7 +15,6 @@ import zjhmale.rainbow.encode.HashFace;
 import zjhmale.rainbow.setting.RainbowSettings;
 
 import java.awt.*;
-import java.awt.font.TextAttribute;
 import java.util.Arrays;
 import java.util.List;
 
