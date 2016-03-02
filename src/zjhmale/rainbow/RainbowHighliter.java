@@ -121,7 +121,8 @@ public class RainbowHighliter implements Annotator {
             boolean haskellLikePredicate = (languageID.equals("Haskell") || languageID.equals("Agda"))
                     && !t.startsWith("--");
             boolean rustPredicate = languageID.equals("RUST")
-                    && !t.startsWith("//");
+                    && !t.startsWith("//")
+                    && !(t.startsWith("/*") && t.endsWith("*/"));
             boolean isParentheses = delimitersList.contains(t);
             boolean isString = (t.startsWith("\"") && t.endsWith("\"")) || (t.startsWith("\'") && t.endsWith("\'"));
 
