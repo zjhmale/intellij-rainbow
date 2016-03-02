@@ -27,6 +27,7 @@ https://plugins.jetbrains.com/plugin/8214
 * Python
 * Haskell
 * Agda
+* Rust (use plugin sdk with JDK8 instead of JDK6 as usual)
 
 ## License
 

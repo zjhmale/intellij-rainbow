@@ -120,10 +120,18 @@ public class RainbowHighliter implements Annotator {
             //for Haskell and Agda
             boolean haskellLikePredicate = (languageID.equals("Haskell") || languageID.equals("Agda"))
                     && !t.startsWith("--");
+            boolean rustPredicate = languageID.equals("RUST")
+                    && !t.startsWith("//");
             boolean isParentheses = delimitersList.contains(t);
             boolean isString = (t.startsWith("\"") && t.endsWith("\"")) || (t.startsWith("\'") && t.endsWith("\'"));
 
-            if ((javaLikePredicate || clojurePredicate || pythonPredicate || haskellLikePredicate) && !isParentheses && !isString) {
+            if ((javaLikePredicate
+                    || clojurePredicate
+                    || pythonPredicate
+                    || haskellLikePredicate
+                    || rustPredicate)
+                    && !isParentheses
+                    && !isString) {
                 TextAttributes attrs = getIdentifierAttributes(t, backgroundColor);
                 holder.createInfoAnnotation(element, null).setEnforcedTextAttributes(attrs);
             }
