@@ -29,6 +29,7 @@ https://plugins.jetbrains.com/plugin/8214
 * Haskell
 * Agda
 * Rust (hack it use plugin sdk with JDK8 and IDEA 15+ instead of JDK6 and IDEA 14+ as usual)
+* Erlang
 
 ## License
 

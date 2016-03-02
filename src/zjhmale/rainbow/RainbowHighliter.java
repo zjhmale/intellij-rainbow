@@ -127,6 +127,8 @@ public class RainbowHighliter implements Annotator {
             boolean jsPredicate = languageID.equals("JavaScript")
                     && !t.startsWith("//")
                     && !(t.startsWith("/*") && t.endsWith("*/"));
+            boolean erlangPredicate = languageID.equals("Erlang")
+                    && !t.startsWith("%");
             boolean isParentheses = delimitersList.contains(t);
             boolean isString = (t.startsWith("\"") && t.endsWith("\"")) || (t.startsWith("\'") && t.endsWith("\'"));
 
@@ -135,7 +137,8 @@ public class RainbowHighliter implements Annotator {
                     || pythonPredicate
                     || haskellLikePredicate
                     || rustPredicate
-                    || jsPredicate)
+                    || jsPredicate
+                    || erlangPredicate)
                     && !isParentheses
                     && !isString) {
                 TextAttributes attrs = getIdentifierAttributes(t, backgroundColor);
