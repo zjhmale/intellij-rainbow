@@ -46,6 +46,7 @@
     <annotator language="Haskell" implementationClass="zjhmale.rainbow.RainbowHighliter"/>
     <annotator language="Agda" implementationClass="zjhmale.rainbow.RainbowHighliter"/>
     <annotator language="RUST" implementationClass="zjhmale.rainbow.RainbowHighliter"/>
+    <annotator language="JavaScript" implementationClass="zjhmale.rainbow.RainbowHighliter"/>
 
     <applicationConfigurable implementation="zjhmale.rainbow.setting.RainbowConfigurable"/>
     <applicationService serviceInterface="zjhmale.rainbow.setting.RainbowSettings"

@@ -22,12 +22,13 @@ https://plugins.jetbrains.com/plugin/8214
 ## Support Languages
 
 * Java
+* JavaScript
 * Kotlin (IDEA 14+)
 * Clojure ([Cursive](https://cursive-ide.com/) already support Rainbow Delimiter)
 * Python
 * Haskell
 * Agda
-* Rust (use plugin sdk with JDK8 instead of JDK6 as usual)
+* Rust (hack it use plugin sdk with JDK8 and IDEA 15+ instead of JDK6 and IDEA 14+ as usual)
 
 ## License
 
