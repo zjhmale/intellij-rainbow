@@ -119,7 +119,8 @@ public class RainbowHighliter implements Annotator {
                     && !t.startsWith("#");
             //for Haskell and Agda
             boolean haskellLikePredicate = (languageID.equals("Haskell") || languageID.equals("Agda"))
-                    && !t.startsWith("--");
+                    && !t.startsWith("--")
+                    && !(t.startsWith("{-") && t.endsWith("-}"));
             boolean rustPredicate = languageID.equals("RUST")
                     && !t.startsWith("//")
                     && !(t.startsWith("/*") && t.endsWith("*/"));
