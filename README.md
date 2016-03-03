@@ -22,7 +22,7 @@ https://plugins.jetbrains.com/plugin/8214
 ## Support Languages
 
 * Java
-* JavaScript
+* JavaScript (IDEA Ultimate which integrate JavaScript Support plugin)
 * Kotlin (IDEA 14+)
 * Clojure ([Cursive](https://cursive-ide.com/) already support Rainbow Delimiter)
 * Python
