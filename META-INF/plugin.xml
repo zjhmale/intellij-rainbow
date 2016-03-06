@@ -11,6 +11,7 @@
   <change-notes><![CDATA[
       <p>1.5:</p>
       <ul>
+        <li>Ignore kotlin doc comment block</li>
         <li>Support for Scala Go Programming Language</li>
       </ul>
       <p>1.4:</p>
