@@ -147,6 +147,9 @@ public class RainbowHighliter implements Annotator {
                     && !t.startsWith("//")
                     && !(t.startsWith("/*") && t.endsWith("*/"))
                     && !scalaDocTokens.contains(type.toString());
+            boolean goPredicate = languageID.equals("go")
+                    && !t.startsWith("//")
+                    && !(t.startsWith("/*") && t.endsWith("*/"));
 
             boolean isParentheses = delimitersList.contains(t);
             boolean isString = (t.startsWith("\"") && t.endsWith("\"")) || (t.startsWith("\'") && t.endsWith("\'"));
@@ -159,7 +162,8 @@ public class RainbowHighliter implements Annotator {
                     || rustPredicate
                     || jsPredicate
                     || erlangPredicate
-                    || scalaPredicate)
+                    || scalaPredicate
+                    || goPredicate)
                     && !isParentheses
                     && !isString) {
                 TextAttributes attrs = getIdentifierAttributes(t, backgroundColor);
