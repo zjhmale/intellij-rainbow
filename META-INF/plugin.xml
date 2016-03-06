@@ -53,6 +53,7 @@
     <annotator language="RUST" implementationClass="zjhmale.rainbow.RainbowHighliter"/>
     <annotator language="JavaScript" implementationClass="zjhmale.rainbow.RainbowHighliter"/>
     <annotator language="Erlang" implementationClass="zjhmale.rainbow.RainbowHighliter"/>
+    <annotator language="Scala" implementationClass="zjhmale.rainbow.RainbowHighliter"/>
 
     <applicationConfigurable implementation="zjhmale.rainbow.setting.RainbowConfigurable"/>
     <applicationService serviceInterface="zjhmale.rainbow.setting.RainbowSettings"

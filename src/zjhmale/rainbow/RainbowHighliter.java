@@ -22,8 +22,19 @@ import java.util.List;
  * Created by zjh on 2016/2/13.
  */
 public class RainbowHighliter implements Annotator {
-    private static String[] delimiters = {"(", ")", "{", "}", "[", "]"};
-    private static List<String> delimitersList = Arrays.asList(delimiters);
+    private static List<String> delimitersList = Arrays.asList("(", ")", "{", "}", "[", "]");
+    private static List<String> kotlinDocTokens = Arrays.asList(
+            "KDOC_START", "KDOC_END", "KDOC_LEADING_ASTERISK",
+            "KDOC_TEXT", "KDOC_TAG_NAME", "KDOC_MARKDOWN_LINK",
+            "KDOC_MARKDOWN_ESCAPED_CHAR", "KDOC_MARKDOWN_INLINE_LINK"
+    );
+    private static List<String> scalaDocTokens = Arrays.asList(
+            "DOC_COMMENT_START", "DOC_COMMENT_END", "DOC_COMMENT_DATA",
+            "DOC_SPACE", "DOC_COMMENT_LEADING_ASTERISKS", "DOC_TAG_NAME",
+            "DOC_INLINE_TAG_START", "DOC_INLINE_TAG_END", "DOC_TAG_VALUE_TOKEN",
+            "DOC_TAG_VALUE_DOT", "DOC_TAG_VALUE_COMMA", "DOC_TAG_VALUE_LPAREN",
+            "DOC_TAG_VALUE_RPAREN", "DOC_TAG_VALUE_SHARP_TOKEN"
+    );
 
     private static Color getAttributesColor(int selector, Color background) {
         Color rainbowColor;
@@ -104,11 +115,14 @@ public class RainbowHighliter implements Annotator {
             IElementType type = ((LeafPsiElement) element).getElementType();
             String t = element.getNode().getText();
 
-            //for JAVA and Kotlin
-            boolean javaLikePredicate = (languageID.equals("JAVA") || languageID.equals("kotlin"))
+            boolean javaPredicate = languageID.equals("JAVA")
                     && type != JavaTokenType.C_STYLE_COMMENT
                     && type != JavaTokenType.END_OF_LINE_COMMENT
                     && !JavaDocTokenType.ALL_JAVADOC_TOKENS.contains(type);
+            boolean kotlinPredicate = languageID.equals("kotlin")
+                    && !t.startsWith("//")
+                    && !(t.startsWith("/*") && t.endsWith("*/"))
+                    && !kotlinDocTokens.contains(type.toString());
             boolean clojurePredicate = languageID.equals("Clojure")
                     && !t.startsWith(";")
                     && !t.startsWith("#_")
@@ -129,16 +143,23 @@ public class RainbowHighliter implements Annotator {
                     && !(t.startsWith("/*") && t.endsWith("*/"));
             boolean erlangPredicate = languageID.equals("Erlang")
                     && !t.startsWith("%");
+            boolean scalaPredicate = languageID.equals("Scala")
+                    && !t.startsWith("//")
+                    && !(t.startsWith("/*") && t.endsWith("*/"))
+                    && !scalaDocTokens.contains(type.toString());
+
             boolean isParentheses = delimitersList.contains(t);
             boolean isString = (t.startsWith("\"") && t.endsWith("\"")) || (t.startsWith("\'") && t.endsWith("\'"));
 
-            if ((javaLikePredicate
+            if ((javaPredicate
+                    || kotlinPredicate
                     || clojurePredicate
                     || pythonPredicate
                     || haskellLikePredicate
                     || rustPredicate
                     || jsPredicate
-                    || erlangPredicate)
+                    || erlangPredicate
+                    || scalaPredicate)
                     && !isParentheses
                     && !isString) {
                 TextAttributes attrs = getIdentifierAttributes(t, backgroundColor);
