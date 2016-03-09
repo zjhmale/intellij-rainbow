@@ -32,6 +32,7 @@ https://plugins.jetbrains.com/plugin/8214
 * Erlang
 * Scala
 * Go
+* Groovy
 
 ## License
 

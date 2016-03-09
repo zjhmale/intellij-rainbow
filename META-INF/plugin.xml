@@ -1,7 +1,7 @@
 <idea-plugin version="2">
   <id>zjhmale.rainbow</id>
   <name>Rainbow</name>
-  <version>1.5</version>
+  <version>1.6</version>
   <vendor email="zjhmale@gmail.com" url="https://github.com/zjhmale">zjhmale</vendor>
 
   <description><![CDATA[
@@ -9,6 +9,11 @@
     ]]></description>
 
   <change-notes><![CDATA[
+      <p>1.6:</p>
+      <ul>
+        <li>Ignore kotlin string token</li>
+        <li>Support for Groovy Programming Language</li>
+      </ul>
       <p>1.5:</p>
       <ul>
         <li>Ignore kotlin doc comment block</li>
