@@ -93,6 +93,32 @@ public class RainbowHighliter implements Annotator {
         return level;
     }
 
+    private static boolean isString(String t) {
+        return (t.startsWith("\"") && t.endsWith("\"")) || (t.startsWith("\'") && t.endsWith("\'"));
+    }
+
+    //a special case predicate string token for kotlin
+    private static boolean isStringForKotlin(PsiElement psiElement) {
+        PsiElement eachParent = psiElement;
+        boolean isString = false;
+        while (eachParent != null) {
+            if (isString(eachParent.getText())) {
+                isString = true;
+                break;
+            }
+            eachParent = eachParent.getParent();
+        }
+        return isString;
+    }
+
+    private static boolean isString(PsiElement element, String languageID) {
+        if (languageID.equals("kotlin")) {
+            return isStringForKotlin(element);
+        } else {
+            return isString(element.getText());
+        }
+    }
+
     @Override
     public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder holder) {
         RainbowSettings settings = RainbowSettings.getInstance();
@@ -152,7 +178,6 @@ public class RainbowHighliter implements Annotator {
                     && !(t.startsWith("/*") && t.endsWith("*/"));
 
             boolean isParentheses = delimitersList.contains(t);
-            boolean isString = (t.startsWith("\"") && t.endsWith("\"")) || (t.startsWith("\'") && t.endsWith("\'"));
 
             if ((javaPredicate
                     || kotlinPredicate
@@ -165,7 +190,7 @@ public class RainbowHighliter implements Annotator {
                     || scalaPredicate
                     || goPredicate)
                     && !isParentheses
-                    && !isString) {
+                    && !isString(element, languageID)) {
                 TextAttributes attrs = getIdentifierAttributes(t, backgroundColor);
                 holder.createInfoAnnotation(element, null).setEnforcedTextAttributes(attrs);
             }
