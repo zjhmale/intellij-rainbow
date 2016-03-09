@@ -23,17 +23,28 @@ import java.util.List;
  */
 public class RainbowHighliter implements Annotator {
     private static List<String> delimitersList = Arrays.asList("(", ")", "{", "}", "[", "]");
+    //https://github.com/JetBrains/kotlin/blob/master/compiler/frontend/src/org/jetbrains/kotlin/kdoc/lexer/KDocTokens.java
     private static List<String> kotlinDocTokens = Arrays.asList(
             "KDOC_START", "KDOC_END", "KDOC_LEADING_ASTERISK",
             "KDOC_TEXT", "KDOC_TAG_NAME", "KDOC_MARKDOWN_LINK",
             "KDOC_MARKDOWN_ESCAPED_CHAR", "KDOC_MARKDOWN_INLINE_LINK"
     );
+    //https://github.com/JetBrains/intellij-scala/blob/idea16.x/src/org/jetbrains/plugins/scala/lang/scaladoc/lexer/ScalaDocTokenType.java
     private static List<String> scalaDocTokens = Arrays.asList(
             "DOC_COMMENT_START", "DOC_COMMENT_END", "DOC_COMMENT_DATA",
             "DOC_SPACE", "DOC_COMMENT_LEADING_ASTERISKS", "DOC_TAG_NAME",
             "DOC_INLINE_TAG_START", "DOC_INLINE_TAG_END", "DOC_TAG_VALUE_TOKEN",
             "DOC_TAG_VALUE_DOT", "DOC_TAG_VALUE_COMMA", "DOC_TAG_VALUE_LPAREN",
             "DOC_TAG_VALUE_RPAREN", "DOC_TAG_VALUE_SHARP_TOKEN"
+    );
+    //https://github.com/JetBrains/intellij-community/blob/master/plugins/groovy/groovy-psi/src/org/jetbrains/plugins/groovy/lang/groovydoc/lexer/GroovyDocTokenTypes.java
+    private static List<String> groovyDocTokens = Arrays.asList(
+            "GDOC_COMMENT_START", "GDOC_COMMENT_END", "GDOC_COMMENT_DATA",
+            "GDOC_TAG_NAME", "GDOC_WHITESPACE", "GDOC_TAG_VALUE_TOKEN",
+            "GDOC_TAG_VALUE_LPAREN", "GDOC_TAG_VALUE_RPAREN", "GDOC_TAG_VALUE_GT",
+            "GDOC_TAG_VALUE_LT", "GDOC_INLINE_TAG_END", "DOC_INLINE_TAG_START",
+            "GDOC_TAG_VALUE_COMMA", "GDOC_TAG_VALUE_SHARP_TOKEN", "GDOC_LEADING_ASTERISKS",
+            "DOC_COMMENT_BAD_CHARACTER"
     );
 
     private static Color getAttributesColor(int selector, Color background) {
@@ -176,6 +187,10 @@ public class RainbowHighliter implements Annotator {
             boolean goPredicate = languageID.equals("go")
                     && !t.startsWith("//")
                     && !(t.startsWith("/*") && t.endsWith("*/"));
+            boolean groovyPredicate = languageID.equals("Groovy")
+                    && !t.startsWith("//")
+                    && !(t.startsWith("/*") && t.endsWith("*/"))
+                    && !groovyDocTokens.contains(type.toString());
 
             boolean isParentheses = delimitersList.contains(t);
 
@@ -188,7 +203,8 @@ public class RainbowHighliter implements Annotator {
                     || jsPredicate
                     || erlangPredicate
                     || scalaPredicate
-                    || goPredicate)
+                    || goPredicate
+                    || groovyPredicate)
                     && !isParentheses
                     && !isString(element, languageID)) {
                 TextAttributes attrs = getIdentifierAttributes(t, backgroundColor);
