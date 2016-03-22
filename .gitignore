@@ -2,3 +2,6 @@ out/
 target/
 *.jar
 *.zip
+.gradle
+.sandbox
+build/
