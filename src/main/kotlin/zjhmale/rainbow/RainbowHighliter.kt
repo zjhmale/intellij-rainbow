@@ -159,6 +159,7 @@ class RainbowHighliter : Annotator {
                     && !ignoreNextFormParent(element)
             val pythonPredicate = languageID == "Python" && !t.startsWith("#")
             val rubyPredicate = languageID == "ruby" && !t.startsWith("#")
+            val elixirPredicate = languageID == "Elixir" && !t.startsWith("#")
             //for Haskell and Agda
             val haskellLikePredicate = (languageID == "Haskell" || languageID == "Agda")
                     && !t.startsWith("--")
@@ -195,7 +196,8 @@ class RainbowHighliter : Annotator {
                     || erlangPredicate
                     || scalaPredicate
                     || goPredicate
-                    || groovyPredicate)
+                    || groovyPredicate
+                    || elixirPredicate)
                     && !isParentheses
                     && !isString(element, languageID)) {
                 val attrs = getIdentifierAttributes(t, backgroundColor)
