@@ -1,7 +1,7 @@
 <idea-plugin version="2">
   <id>zjhmale.rainbow</id>
   <name>Rainbow</name>
-  <version>1.6</version>
+  <version>1.7</version>
   <vendor email="zjhmale@gmail.com" url="https://github.com/zjhmale">zjhmale</vendor>
 
   <description><![CDATA[
@@ -9,6 +9,10 @@
     ]]></description>
 
   <change-notes><![CDATA[
+      <p>1.7:</p>
+      <ul>
+        <li>Support for Ruby Elixir Programming Language</li>
+      </ul>
       <p>1.6:</p>
       <ul>
         <li>Ignore kotlin string token</li>
