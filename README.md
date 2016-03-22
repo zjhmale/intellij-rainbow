@@ -34,6 +34,12 @@ https://plugins.jetbrains.com/plugin/8214
 * Go
 * Groovy
 
+## Development
+
+* `./gradlew runIdea`
+* `./gradlew buildPlugin`
+* `./gradlew test`
+
 ## License
 
 Copyright © 2016 zjhmale
