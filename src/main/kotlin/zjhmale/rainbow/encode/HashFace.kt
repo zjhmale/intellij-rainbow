@@ -66,7 +66,7 @@ object HashFace {
         val buf = StringBuilder(len * 2)
         // 把密文转换成十六进制的字符串形式
         for (j in 0..len - 1) {
-            val b = bytes[j] as Int
+            val b = bytes[j].toInt()
             buf.append(HEX_DIGITS[b shl 4 and 0x0f])
             buf.append(HEX_DIGITS[b and 0x0f])
         }

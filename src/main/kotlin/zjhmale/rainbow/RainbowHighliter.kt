@@ -12,27 +12,26 @@ import zjhmale.rainbow.encode.HashFace
 import zjhmale.rainbow.setting.RainbowSettings
 import java.awt.Color
 import java.awt.Font
-import java.util.*
 
 /**
  * Created by zjh on 16/3/22.
  */
 class RainbowHighliter : Annotator {
-    private val delimitersList = Arrays.asList("(", ")", "{", "}", "[", "]")
+    private val delimitersList = arrayOf("(", ")", "{", "}", "[", "]")
     //https://github.com/JetBrains/kotlin/blob/master/compiler/frontend/src/org/jetbrains/kotlin/kdoc/lexer/KDocTokens.java
-    private val kotlinDocTokens = Arrays.asList(
+    private val kotlinDocTokens = arrayOf(
             "KDOC_START", "KDOC_END", "KDOC_LEADING_ASTERISK",
             "KDOC_TEXT", "KDOC_TAG_NAME", "KDOC_MARKDOWN_LINK",
             "KDOC_MARKDOWN_ESCAPED_CHAR", "KDOC_MARKDOWN_INLINE_LINK")
     //https://github.com/JetBrains/intellij-scala/blob/idea16.x/src/org/jetbrains/plugins/scala/lang/scaladoc/lexer/ScalaDocTokenType.java
-    private val scalaDocTokens = Arrays.asList(
+    private val scalaDocTokens = arrayOf(
             "DOC_COMMENT_START", "DOC_COMMENT_END", "DOC_COMMENT_DATA",
             "DOC_SPACE", "DOC_COMMENT_LEADING_ASTERISKS", "DOC_TAG_NAME",
             "DOC_INLINE_TAG_START", "DOC_INLINE_TAG_END", "DOC_TAG_VALUE_TOKEN",
             "DOC_TAG_VALUE_DOT", "DOC_TAG_VALUE_COMMA", "DOC_TAG_VALUE_LPAREN",
             "DOC_TAG_VALUE_RPAREN", "DOC_TAG_VALUE_SHARP_TOKEN")
     //https://github.com/JetBrains/intellij-community/blob/master/plugins/groovy/groovy-psi/src/org/jetbrains/plugins/groovy/lang/groovydoc/lexer/GroovyDocTokenTypes.java
-    private val groovyDocTokens = Arrays.asList(
+    private val groovyDocTokens = arrayOf(
             "GDOC_COMMENT_START", "GDOC_COMMENT_END", "GDOC_COMMENT_DATA",
             "GDOC_TAG_NAME", "GDOC_WHITESPACE", "GDOC_TAG_VALUE_TOKEN",
             "GDOC_TAG_VALUE_LPAREN", "GDOC_TAG_VALUE_RPAREN", "GDOC_TAG_VALUE_GT",
@@ -116,7 +115,7 @@ class RainbowHighliter : Annotator {
     }
 
     private fun isString(element: PsiElement, languageID: String): Boolean {
-        if (languageID == "kotlin") {
+        if (languageID == "kotlin" || languageID == "ruby") {
             return isStringForKotlin(element)
         } else {
             return isString(element.text)
@@ -159,6 +158,7 @@ class RainbowHighliter : Annotator {
                     && !t.startsWith("#{")
                     && !ignoreNextFormParent(element)
             val pythonPredicate = languageID == "Python" && !t.startsWith("#")
+            val rubyPredicate = languageID == "ruby" && !t.startsWith("#")
             //for Haskell and Agda
             val haskellLikePredicate = (languageID == "Haskell" || languageID == "Agda")
                     && !t.startsWith("--")
@@ -188,6 +188,7 @@ class RainbowHighliter : Annotator {
                     || kotlinPredicate
                     || clojurePredicate
                     || pythonPredicate
+                    || rubyPredicate
                     || haskellLikePredicate
                     || rustPredicate
                     || jsPredicate

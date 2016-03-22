@@ -66,6 +66,7 @@
     <annotator language="Scala" implementationClass="zjhmale.rainbow.RainbowHighliter"/>
     <annotator language="go" implementationClass="zjhmale.rainbow.RainbowHighliter"/>
     <annotator language="Groovy" implementationClass="zjhmale.rainbow.RainbowHighliter"/>
+    <annotator language="ruby" implementationClass="zjhmale.rainbow.RainbowHighliter"/>
 
     <applicationConfigurable implementation="zjhmale.rainbow.setting.RainbowConfigurable"/>
     <applicationService serviceInterface="zjhmale.rainbow.setting.RainbowSettings"
