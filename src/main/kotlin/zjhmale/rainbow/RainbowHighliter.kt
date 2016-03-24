@@ -68,19 +68,21 @@ class RainbowHighliter : Annotator {
                 || text.contains("]")
     }
 
-    //predicate #_ reader
-    private fun ignoreNextFormParent(psiElement: PsiElement): Boolean {
-        var predicate = false
-        var eachParent: PsiElement? = psiElement
+    private fun visitParent(element: PsiElement, pred: (PsiElement) -> Boolean): Boolean {
+        var result = false
+        var eachParent: PsiElement? = element
         while (eachParent != null) {
-            if (eachParent.javaClass.toString() == "class cursive.psi.impl.ClSexpComment") {
-                if (eachParent.text.startsWith("#_")) {
-                    predicate = true
-                }
+            if (pred(eachParent)) {
+                result = true
             }
             eachParent = eachParent.parent
         }
-        return predicate
+        return result
+    }
+
+    //predicate #_ reader
+    val ignoreNextFormParent = { element: PsiElement ->
+        visitParent(element, { e -> e.javaClass.toString() == "class cursive.psi.impl.ClSexpComment" && e.text.startsWith("#_") })
     }
 
     //get delimiter level
@@ -100,26 +102,11 @@ class RainbowHighliter : Annotator {
         return t.startsWith("\"") && t.endsWith("\"") || t.startsWith("\'") && t.endsWith("\'")
     }
 
-    //a special case predicate string token for kotlin
-    private fun isStringForKotlin(psiElement: PsiElement): Boolean {
-        var eachParent: PsiElement? = psiElement
-        var isString = false
-        while (eachParent != null) {
-            if (isString(eachParent.text)) {
-                isString = true
-                break
-            }
-            eachParent = eachParent.parent
-        }
-        return isString
-    }
+    //predicate string token
+    val isString = { element: PsiElement -> visitParent(element, { e -> isString(e.text) }) }
 
-    private fun isString(element: PsiElement, languageID: String): Boolean {
-        if (languageID == "kotlin" || languageID == "ruby") {
-            return isStringForKotlin(element)
-        } else {
-            return isString(element.text)
-        }
+    val isHaskellMultilineComment = { elemet: PsiElement ->
+        visitParent(elemet, { e -> e.text.startsWith("{-") && e.text.endsWith("-}") })
     }
 
     override fun annotate(element: PsiElement, holder: AnnotationHolder) {
@@ -163,7 +150,7 @@ class RainbowHighliter : Annotator {
             //for Haskell and Agda
             val haskellLikePredicate = (languageID == "Haskell" || languageID == "Agda")
                     && !t.startsWith("--")
-                    && !(t.startsWith("{-") && t.endsWith("-}"))
+                    && !isHaskellMultilineComment(element)
             val rustPredicate = languageID == "RUST"
                     && !t.startsWith("//")
                     && !(t.startsWith("/*") && t.endsWith("*/"))
@@ -199,7 +186,7 @@ class RainbowHighliter : Annotator {
                     || groovyPredicate
                     || elixirPredicate)
                     && !isParentheses
-                    && !isString(element, languageID)) {
+                    && !isString(element)) {
                 val attrs = getIdentifierAttributes(t, backgroundColor)
                 holder.createInfoAnnotation(element as PsiElement, null).setEnforcedTextAttributes(attrs)
             }
