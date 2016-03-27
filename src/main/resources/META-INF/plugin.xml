@@ -1,7 +1,6 @@
 <idea-plugin version="2">
   <id>zjhmale.rainbow</id>
   <name>Rainbow</name>
-  <version>1.7.1</version>
   <vendor email="zjhmale@gmail.com" url="https://github.com/zjhmale">zjhmale</vendor>
 
   <description><![CDATA[
@@ -9,9 +8,14 @@
     ]]></description>
 
   <change-notes><![CDATA[
+      <p>1.7.3:</p>
+      <ul>
+        <li>Ignore haskell multiline comment</li>
+      </ul>
       <p>1.7.1:</p>
       <ul>
-        <li>Fix haskell string literal and mutliline comment highlight</li>
+        <li>Refactor</li>
+        <li>Ignore haskell string literal</li>
       </ul>
       <p>1.7:</p>
       <ul>
