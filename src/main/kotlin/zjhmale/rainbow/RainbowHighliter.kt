@@ -12,6 +12,7 @@ import zjhmale.rainbow.encode.HashFace
 import zjhmale.rainbow.setting.RainbowSettings
 import java.awt.Color
 import java.awt.Font
+import java.util.regex.Pattern
 
 /**
  * Created by zjh on 16/3/22.
@@ -38,6 +39,9 @@ class RainbowHighliter : Annotator {
             "GDOC_TAG_VALUE_LT", "GDOC_INLINE_TAG_END", "DOC_INLINE_TAG_START",
             "GDOC_TAG_VALUE_COMMA", "GDOC_TAG_VALUE_SHARP_TOKEN", "GDOC_LEADING_ASTERISKS",
             "DOC_COMMENT_BAD_CHARACTER")
+    private val haskellMultilineCommentPattern = Pattern.compile(
+            "\\{-.*?-\\}"
+    )
 
     private fun getAttributesColor(selector: Int, background: Color): Color {
         val rainbowColor: Color
@@ -105,8 +109,14 @@ class RainbowHighliter : Annotator {
     //predicate string token
     val isString = { element: PsiElement -> visitParent(element, { e -> isString(e.text) }) }
 
-    val isHaskellMultilineComment = { elemet: PsiElement ->
-        visitParent(elemet, { e -> e.text.startsWith("{-") && e.text.endsWith("-}") })
+    val isHaskellMultilineComment = { element: PsiElement ->
+        val matcher = haskellMultilineCommentPattern.matcher(element.containingFile.text.replace("\n", " "))
+        var isInMultiLineComment = false
+        while (matcher.find()) {
+            isInMultiLineComment = matcher.start() <= element.textOffset && element.textOffset <= matcher.end()
+            if (isInMultiLineComment) break
+        }
+        isInMultiLineComment
     }
 
     override fun annotate(element: PsiElement, holder: AnnotationHolder) {
