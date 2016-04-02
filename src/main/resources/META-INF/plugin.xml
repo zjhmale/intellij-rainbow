@@ -8,14 +8,18 @@
     ]]></description>
 
   <change-notes><![CDATA[
+      <p>1.7.6:</p>
+      <ul>
+        <li>Ignore JavaScript multiline comment</li>
+      </ul>
       <p>1.7.3:</p>
       <ul>
-        <li>Ignore haskell multiline comment</li>
+        <li>Ignore Haskell multiline comment</li>
       </ul>
       <p>1.7.1:</p>
       <ul>
         <li>Refactor</li>
-        <li>Ignore haskell string literal</li>
+        <li>Ignore Haskell string literal</li>
       </ul>
       <p>1.7:</p>
       <ul>
