@@ -42,6 +42,9 @@ class RainbowHighliter : Annotator {
     private val haskellMultilineCommentPattern = Pattern.compile(
             "\\{-.*?-\\}"
     )
+    private val normalMultilineCommentPattern = Pattern.compile(
+            "/\\*.*?\\*/"
+    )
 
     private fun getAttributesColor(selector: Int, background: Color): Color {
         val rainbowColor: Color
@@ -109,8 +112,8 @@ class RainbowHighliter : Annotator {
     //predicate string token
     val isString = { element: PsiElement -> visitParent(element, { e -> isString(e.text) }) }
 
-    val isHaskellMultilineComment = { element: PsiElement ->
-        val matcher = haskellMultilineCommentPattern.matcher(element.containingFile.text.replace("\n", " "))
+    val isMultilineComment = { element: PsiElement, pattern: Pattern ->
+        val matcher = pattern.matcher(element.containingFile.text.replace("\n", " "))
         var isInMultiLineComment = false
         while (matcher.find()) {
             isInMultiLineComment = matcher.start() <= element.textOffset && element.textOffset <= matcher.end()
@@ -118,6 +121,10 @@ class RainbowHighliter : Annotator {
         }
         isInMultiLineComment
     }
+
+    val isHaskellMultilineComment = { element: PsiElement -> isMultilineComment(element, haskellMultilineCommentPattern) }
+
+    val isNormalMultilineComment = { element: PsiElement -> isMultilineComment(element, normalMultilineCommentPattern) }
 
     override fun annotate(element: PsiElement, holder: AnnotationHolder) {
         val settings = RainbowSettings.getInstance()
@@ -166,7 +173,7 @@ class RainbowHighliter : Annotator {
                     && !(t.startsWith("/*") && t.endsWith("*/"))
             val jsPredicate = languageID == "JavaScript"
                     && !t.startsWith("//")
-                    && !(t.startsWith("/*") && t.endsWith("*/"))
+                    && !isNormalMultilineComment(element)
             val erlangPredicate = languageID == "Erlang" && !t.startsWith("%")
             val scalaPredicate = languageID == "Scala"
                     && !t.startsWith("//")
