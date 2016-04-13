@@ -137,7 +137,10 @@ class RainbowHighliter : Annotator {
         if (element is LeafPsiElement
                 && delimitersList.contains(element.text)
                 && languageID != "Clojure"
-                && settings.isRainbowDelimiter) {
+                && settings.isRainbowDelimiter
+                && !isString(element)
+                && !isHaskellMultilineComment(element)
+                && !isNormalMultilineComment(element)) {
             val level = getDelimiterLevel(element)
             val attrs = getDelimiterAttributes(level, backgroundColor)
             holder.createInfoAnnotation(element as PsiElement, null).setEnforcedTextAttributes(attrs)

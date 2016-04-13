@@ -8,6 +8,10 @@
     ]]></description>
 
   <change-notes><![CDATA[
+      <p>1.7.9:</p>
+      <ul>
+        <li>Ignore delimiters in string literal and multiline comment</li>
+      </ul>
       <p>1.7.6:</p>
       <ul>
         <li>Ignore JavaScript multiline comment</li>
