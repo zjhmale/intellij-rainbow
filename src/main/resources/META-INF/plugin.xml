@@ -8,6 +8,10 @@
     ]]></description>
 
   <change-notes><![CDATA[
+      <p>1.8.0:</p>
+      <ul>
+        <li>Compatible with other IntelliJ Platform Products</li>
+      </ul>
       <p>1.7.9:</p>
       <ul>
         <li>Ignore delimiters in string literal and multiline comment</li>
