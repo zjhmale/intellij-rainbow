@@ -21,6 +21,7 @@ https://plugins.jetbrains.com/plugin/8214
 
 ## Support Languages
 
+* C family (C/C++/ObjectiveC)
 * Java
 * JavaScript (IDEA Ultimate and integrate with JavaScript Support plugin)
 * Kotlin (IDEA 14+)
