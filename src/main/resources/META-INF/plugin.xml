@@ -8,6 +8,10 @@
     ]]></description>
 
   <change-notes><![CDATA[
+      <p>1.8.3:</p>
+      <ul>
+        <li>Support C family languages (C/C++/ObjectiveC)</li>
+      </ul>
       <p>1.8.0:</p>
       <ul>
         <li>Compatible with other IntelliJ Platform Products</li>
