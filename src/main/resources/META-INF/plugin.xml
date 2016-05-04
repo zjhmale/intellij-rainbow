@@ -90,6 +90,7 @@
     <annotator language="Groovy" implementationClass="zjhmale.rainbow.RainbowHighliter"/>
     <annotator language="ruby" implementationClass="zjhmale.rainbow.RainbowHighliter"/>
     <annotator language="Elixir" implementationClass="zjhmale.rainbow.RainbowHighliter"/>
+    <annotator language="ObjectiveC" implementationClass="zjhmale.rainbow.RainbowHighliter"/>
 
     <applicationConfigurable implementation="zjhmale.rainbow.setting.RainbowConfigurable"/>
     <applicationService serviceInterface="zjhmale.rainbow.setting.RainbowSettings"

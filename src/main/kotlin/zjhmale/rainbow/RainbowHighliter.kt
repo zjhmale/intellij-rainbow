@@ -189,6 +189,9 @@ class RainbowHighliter : Annotator {
                     && !t.startsWith("//")
                     && !(t.startsWith("/*") && t.endsWith("*/"))
                     && !groovyDocTokens.contains(type.toString())
+            val cppPredicate = languageID == "ObjectiveC"
+                    && !t.startsWith("//")
+                    && !isNormalMultilineComment(element)
 
             val isParentheses = delimitersList.contains(t)
 
@@ -204,7 +207,8 @@ class RainbowHighliter : Annotator {
                     || scalaPredicate
                     || goPredicate
                     || groovyPredicate
-                    || elixirPredicate)
+                    || elixirPredicate
+                    || cppPredicate)
                     && !isParentheses
                     && !isString(element)) {
                 val attrs = getIdentifierAttributes(t, backgroundColor)
