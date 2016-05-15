@@ -5,7 +5,7 @@ https://plugins.jetbrains.com/plugin/8214
 * Rainbow highlighting identifiers based on their names. Each identifier gets a color based on a hash of its name.
 * Rainbow highlighting delimiters such as parentheses, brackets or braces according to their depth. not just in Lisp.
 
-## Snapshots
+## Screenshots
 
 * for dark themes
 
