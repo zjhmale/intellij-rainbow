@@ -23,6 +23,7 @@ https://plugins.jetbrains.com/plugin/8214
 
 * C family (C/C++/ObjectiveC)
 * Java
+* PHP
 * JavaScript (IDEA Ultimate and integrate with JavaScript Support plugin)
 * Kotlin (IDEA 14+)
 * Clojure ([Cursive](https://cursive-ide.com/) already support Rainbow Delimiter)
