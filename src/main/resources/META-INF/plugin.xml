@@ -8,6 +8,10 @@
     ]]></description>
 
   <change-notes><![CDATA[
+      <p>1.8.8:</p>
+      <ul>
+        <li>Support new version of IntelliJ <a href="https://github.com/zjhmale/intellij-rainbow/issues/16">#16</a></li>
+      </ul>
       <p>1.8.6:</p>
       <ul>
         <li>Support PHP programming languages</li>
