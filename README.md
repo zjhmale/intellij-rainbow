@@ -40,6 +40,7 @@ https://plugins.jetbrains.com/plugin/8214
 
 ## Development
 
+* `gradle wrapper`
 * `./gradlew runIdea`
 * `./gradlew buildPlugin`
 * `./gradlew test`

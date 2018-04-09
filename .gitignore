@@ -5,3 +5,6 @@ target/
 .gradle
 .sandbox
 build/
+*.iml
+.idea/
+*.properties
