@@ -1,21 +1,25 @@
 buildscript {
+    ext.kotlin_version = '1.3.71'
+
     repositories {
         mavenCentral()
     }
 
     dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
 plugins {
-    id "org.jetbrains.intellij" version "0.2.17"
+    id "org.jetbrains.intellij" version "0.4.18"
 }
 
 allprojects {
 
     // IntelliJ plugin configuration
 
+    apply plugin: 'java'
+    apply plugin: 'kotlin'
     apply plugin: 'org.jetbrains.intellij'
 
     intellij {
@@ -26,10 +30,9 @@ allprojects {
         updateSinceUntilBuild = false
 
         sandboxDirectory project.rootDir.canonicalPath + "/.sandbox"
-    }
 
-    apply plugin: 'java'
-    apply plugin: 'kotlin'
+        plugins 'java'
+    }
 
     sourceCompatibility = javaVersion
     targetCompatibility = javaVersion
@@ -51,7 +54,6 @@ allprojects {
     dependencies {
         compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
         compile "org.jetbrains.kotlin:kotlin-runtime:$kotlinVersion"
-
 
         testCompile "junit:junit:4.+"
         testCompile 'org.assertj:assertj-core:3.2.0'
