@@ -8,6 +8,10 @@
     ]]></description>
 
   <change-notes><![CDATA[
+      <p>1.8.9:</p>
+      <ul>
+        <li>Support for IntelliJ IDEA 2020.1</li>
+      </ul>
       <p>1.8.8:</p>
       <ul>
         <li>Support new version of IntelliJ <a href="https://github.com/zjhmale/intellij-rainbow/issues/16">#16</a></li>
@@ -85,6 +89,7 @@
   <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
        on how to target different products -->
   <depends>com.intellij.modules.lang</depends>
+  <depends>com.intellij.modules.java</depends>
 
   <extensions defaultExtensionNs="com.intellij">
     <!-- Add your extensions here -->

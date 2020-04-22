@@ -12,7 +12,7 @@ import org.jetbrains.annotations.Nullable;
  */
 
 @State(name = "RainbowSettings", storages = {
-        @Storage(id = "rainbow_config", file = "$APP_CONFIG$/rainbow_application.xml")
+        @Storage("$APP_CONFIG$/rainbow_application.xml")
 })
 public class RainbowSettings implements PersistentStateComponent<RainbowSettings> {
     public boolean isRainbowIdentifier = true;
